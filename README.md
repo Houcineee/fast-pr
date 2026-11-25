@@ -16,6 +16,8 @@ The token is saved per repository in `~/.config/pa9pa9/credentials.json` with ow
 From the project clone:
 
 ```sh
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .
 pa9pa9 setup
 ```

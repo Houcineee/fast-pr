@@ -232,7 +232,7 @@ def codex_review(root: Path, pull: dict[str, Any], base_sha: str) -> dict[str, A
             f"PR description:\n{pull.get('body') or '(none)'}\n\n"
             "Use the $pa9pa9-review skill and follow .pa9pa9/rules.md. The checkout contains the PR head. "
             "Compare it to the base using git diff BASE...HEAD as needed. Return exactly the JSON object required by the skill.\n\n"
-            f"Initial diff:\n```diff\n{diff[:120000]}\n````
+            f"Initial diff:\n```diff\n{diff[:120000]}\n```"
         )
         schema = Path(__file__).parent / "templates" / "output-schema.json"
         output_file = temp_dir / ".pa9pa9-review-output.json"
