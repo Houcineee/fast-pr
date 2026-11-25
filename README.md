@@ -1,0 +1,40 @@
+# PA9 PA9
+
+PA9 PA9 is a local command-line tool that asks your signed-in Codex CLI to review GitHub pull requests, then posts actionable suggestions as a comment-only PR review. It does not edit branches or create commits. This version runs manually; scheduling is out of scope.
+
+## Requirements
+
+- Python 3.10 or newer
+- Git
+- Codex CLI installed and signed in (`codex login`)
+- A GitHub fine-grained personal access token scoped to this repository, with **Pull requests: read and write**. GitHub's Metadata read permission is granted automatically.
+
+The token is saved per repository in `~/.config/pa9pa9/credentials.json` with owner-only file permissions. It is never passed to Codex. You can instead provide `PA9PA9_GITHUB_TOKEN` in the environment for a single run.
+
+## Install and configure
+
+From the project clone:
+
+```sh
+python -m pip install -e .
+pa9pa9 setup
+```
+
+Setup detects the repository from its `origin` GitHub remote, checks that Codex is installed and signed in, installs the generic review skill and rules file if they are missing, and prompts for the GitHub token without echoing it. Existing skill and rules files are preserved. The selected repository and local review state are ignored by Git.
+
+Edit these files to customize reviews:
+
+- `.agents/skills/pa9pa9-review/SKILL.md` — Codex review procedure and output requirements.
+- `.pa9pa9/rules.md` — project review and severity rules.
+
+## Review pull requests
+
+```sh
+pa9pa9 review
+```
+
+The CLI checks open PRs. A PR is reviewed when its head commit or base commit differs from the last successfully posted review. Rebase-generated head SHA changes trigger a review. `pa9pa9 review --force` reviews all open PRs again.
+
+Reviews run in a temporary detached worktree at the PR head, so uncommitted changes in the user's checkout are not included or altered. Codex runs with a read-only sandbox. Before publishing, PA9 PA9 checks that the PR head and base SHAs have not changed during analysis. Findings are posted as an ordinary `COMMENT` review, which does not request changes or block merging.
+
+Local state is kept in `.pa9pa9/state.json` and ignored by Git. The state is updated only after the GitHub review is accepted. The GitHub API needs Pull requests read/write access to list PRs and create reviews with inline comments.

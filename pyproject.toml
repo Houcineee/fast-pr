@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pa9pa9"
+version = "0.1.0"
+description = "A local Codex-powered GitHub pull request reviewer"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+pa9pa9 = "pa9pa9.cli:main"
+
+[tool.setuptools.package-data]
+pa9pa9 = ["templates/*", "templates/skill/*"]
