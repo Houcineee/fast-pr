@@ -1,5 +1,5 @@
-.pa9pa9/state.json
-.pa9pa9/config.json
+.fast-pr/state.json
+.fast-pr/config.json
 __pycache__/
 *.py[cod]
 *.egg-info/
