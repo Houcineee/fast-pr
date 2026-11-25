@@ -1,4 +1,4 @@
-# PA9 PA9 pull request review rules
+# Fast PR pull request review rules
 
 These are the default review rules. Add concrete project-specific architecture, language, security, and compatibility requirements below.
 

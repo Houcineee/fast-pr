@@ -1,15 +1,15 @@
 ---
-name: pa9pa9-review
-description: Review a pull request for actionable defects using the project's review rules, then return structured findings for the PA9 PA9 CLI to publish.
+name: fast-pr-review
+description: Review a pull request for actionable defects using the project's review rules, then return structured findings for the Fast PR CLI to publish.
 ---
 
 # Pull request review
 
-Review the pull request changes as a careful senior software engineer. Follow the repository's `.pa9pa9/rules.md` as the source of project-specific review policy.
+Review the pull request changes as a careful senior software engineer. Follow the repository's `.fast-pr/rules.md` as the source of project-specific review policy.
 
 ## Procedure
 
-1. Read `.pa9pa9/rules.md` and the repository guidance that applies to changed files (for example `AGENTS.md`, contribution guides, and relevant package documentation).
+1. Read `.fast-pr/rules.md` and the repository guidance that applies to changed files (for example `AGENTS.md`, contribution guides, and relevant package documentation).
 2. Inspect the PR diff and enough surrounding code and call sites to understand behavior. Use the base and head revisions supplied by the caller; do not assume the working tree represents either revision.
 3. Trace likely failure paths, boundary cases, error handling, data flow, and compatibility implications. Check tests or related code when useful.
 4. Report only concrete defects introduced by this PR. A finding must be actionable, explain a user-visible or operational consequence, and point to the smallest relevant changed line range. Do not report a concern that cannot be supported by the available code/context.
@@ -21,7 +21,7 @@ Review the pull request changes as a careful senior software engineer. Follow th
 - Do not flag pre-existing issues, speculative risks, personal preferences, or style differences unless the project rules identify a real, enforceable convention whose violation causes a problem.
 - Avoid duplicate findings. Prefer one finding that explains the root cause over several symptoms.
 - Keep each finding concise: state the condition, consequence, and (when helpful) a practical fix direction.
-- Use severity `critical`, `high`, `medium`, or `low` according to `.pa9pa9/rules.md`.
+- Use severity `critical`, `high`, `medium`, or `low` according to `.fast-pr/rules.md`.
 - If there are no actionable defects, return an empty findings array. Do not invent issues to make the review appear useful.
 
 ## Output contract
