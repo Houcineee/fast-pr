@@ -284,7 +284,7 @@ def post_review(token: str, owner: str, repo: str, pull: dict[str, Any], review:
     payload = {
         "commit_id": pull["head"]["sha"],
         "body": review["summary"],
-        "event": "REQUEST_CHANGES",
+        "event": "COMMENT",
         "comments": comments,
     }
     github(token, "POST", f"/repos/{urllib.parse.quote(owner)}/{urllib.parse.quote(repo)}/pulls/{pull['number']}/reviews", payload)
